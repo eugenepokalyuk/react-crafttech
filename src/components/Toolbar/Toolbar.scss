@@ -3,34 +3,53 @@
     background: #333;
     color: #fff;
     position: fixed;
-    top: 10px;
-    left: 10px;
+    bottom: 10px;
+    right: 10px;
     z-index: 1000;
     display: flex;
     flex-direction: column;
     gap: 15px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    cursor: grab;
-    max-width: 300px;
-    user-select: none;
+    width: 280px;
+    max-width: 90%;
+    transition: transform 0.3s ease;
 
-    &.dragging {
-        cursor: grabbing;
+    &.collapsed {
+        transform: translateY(100%);
     }
 
     .toolbar-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        cursor: move;
         font-weight: bold;
+    }
+
+    .collapse-btn,
+    .expand-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background: none;
+        border: none;
+        cursor: pointer;
+        background: #555;
+
+        width: 48px;
+        height: 48px;
+        border-radius: 100%;
+
+        img {
+            width: 24px;
+            height: 24px;
+        }
     }
 
     .shape-select {
         display: flex;
         align-items: center;
-        justify-content: space-between;
         gap: 10px;
 
         label {
@@ -44,6 +63,7 @@
             background: #555;
             color: #fff;
             cursor: pointer;
+            width: 100%;
 
             &:hover {
                 background: #666;
@@ -85,6 +105,7 @@
     .pattern-select {
         display: flex;
         gap: 10px;
+        flex-wrap: wrap;
 
         .pattern-circle {
             width: 30px;
@@ -98,6 +119,81 @@
             &:hover {
                 border-color: #ccc;
             }
+        }
+    }
+}
+
+.expand-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background: #333;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1000;
+
+    img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .toolbar {
+        flex-direction: row;
+        flex-wrap: wrap;
+        bottom: 0;
+        right: 0;
+        padding: 10px;
+        width: 100%;
+        box-shadow: none;
+        border-radius: 0;
+        gap: 10px;
+        max-width: 100%;
+
+        .toolbar-header {
+            flex: 1 1 100%;
+            justify-content: space-between;
+        }
+
+        .collapse-btn,
+        .expand-btn {
+            max-width: 48px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            background: #555;
+
+            img {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+        .shape-select {
+            flex: 1 1 100%;
+            justify-content: center;
+
+            label {
+                display: none;
+            }
+        }
+
+        button,
+        .undo-redo,
+        .pattern-select {
+            flex: 1 1 100%;
+            justify-content: center;
+        }
+
+        .pattern-select {
+            justify-content: space-evenly;
         }
     }
 }

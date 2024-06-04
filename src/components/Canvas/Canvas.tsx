@@ -60,20 +60,20 @@ const Canvas: React.FC = () => {
         updateHistory(newShapes);
     };
 
-    const handleSelectShape = (_e: KonvaEventObject<MouseEvent>, id: string) => {
+    const handleSelectShape = (_e: KonvaEventObject<MouseEvent | TouchEvent>, id: string) => {
         if (tool === 'select') {
             setSelectedShapeId(id);
         }
     };
 
-    const handleStageMouseDown = (e: KonvaEventObject<MouseEvent>) => {
+    const handleStageMouseDown = (e: KonvaEventObject<MouseEvent | TouchEvent>) => {
         const clickedOnEmpty = e.target === e.target.getStage();
         if (clickedOnEmpty) {
             setSelectedShapeId(null);
         }
     };
 
-    const handleDragEnd = (e: KonvaEventObject<DragEvent>, id: string) => {
+    const handleDragEnd = (e: KonvaEventObject<DragEvent | TouchEvent>, id: string) => {
         const newShapes = shapes.map((shape, index) => {
             if (shape.id === id) {
                 return {
@@ -219,6 +219,7 @@ const Canvas: React.FC = () => {
                                             onDragEnd={(e) => handleDragEnd(e, shape.id)}
                                             onTransformEnd={(e) => handleTransformEnd(e, shape.id)}
                                             onClick={(e) => handleSelectShape(e, shape.id)}
+                                            onTouchStart={(e) => handleSelectShape(e, shape.id)}
                                         />
                                     );
                                 case 'circle':
@@ -234,6 +235,7 @@ const Canvas: React.FC = () => {
                                             onDragEnd={(e) => handleDragEnd(e, shape.id)}
                                             onTransformEnd={(e) => handleTransformEnd(e, shape.id)}
                                             onClick={(e) => handleSelectShape(e, shape.id)}
+                                            onTouchStart={(e) => handleSelectShape(e, shape.id)}
                                         />
                                     );
                                 case 'line':
@@ -247,6 +249,7 @@ const Canvas: React.FC = () => {
                                             onDragEnd={(e) => handleDragEnd(e, shape.id)}
                                             onTransformEnd={(e) => handleTransformEnd(e, shape.id)}
                                             onClick={(e) => handleSelectShape(e, shape.id)}
+                                            onTouchStart={(e) => handleSelectShape(e, shape.id)}
                                         />
                                     );
                                 case 'ellipse':
@@ -263,6 +266,7 @@ const Canvas: React.FC = () => {
                                             onDragEnd={(e) => handleDragEnd(e, shape.id)}
                                             onTransformEnd={(e) => handleTransformEnd(e, shape.id)}
                                             onClick={(e) => handleSelectShape(e, shape.id)}
+                                            onTouchStart={(e) => handleSelectShape(e, shape.id)}
                                         />
                                     );
                                 case 'text':
@@ -279,6 +283,7 @@ const Canvas: React.FC = () => {
                                             onDragEnd={(e) => handleDragEnd(e, shape.id)}
                                             onTransformEnd={(e) => handleTransformEnd(e, shape.id)}
                                             onClick={(e) => handleSelectShape(e, shape.id)}
+                                            onTouchStart={(e) => handleSelectShape(e, shape.id)}
                                         />
                                     );
                                 case 'arrow':
@@ -293,6 +298,7 @@ const Canvas: React.FC = () => {
                                             onDragEnd={(e) => handleDragEnd(e, shape.id)}
                                             onTransformEnd={(e) => handleTransformEnd(e, shape.id)}
                                             onClick={(e) => handleSelectShape(e, shape.id)}
+                                            onTouchStart={(e) => handleSelectShape(e, shape.id)}
                                         />
                                     );
                                 case 'star':
@@ -310,6 +316,7 @@ const Canvas: React.FC = () => {
                                             onDragEnd={(e) => handleDragEnd(e, shape.id)}
                                             onTransformEnd={(e) => handleTransformEnd(e, shape.id)}
                                             onClick={(e) => handleSelectShape(e, shape.id)}
+                                            onTouchStart={(e) => handleSelectShape(e, shape.id)}
                                         />
                                     );
                                 case 'polygon':
@@ -326,6 +333,7 @@ const Canvas: React.FC = () => {
                                             onDragEnd={(e) => handleDragEnd(e, shape.id)}
                                             onTransformEnd={(e) => handleTransformEnd(e, shape.id)}
                                             onClick={(e) => handleSelectShape(e, shape.id)}
+                                            onTouchStart={(e) => handleSelectShape(e, shape.id)}
                                         />
                                     );
                                 default:
