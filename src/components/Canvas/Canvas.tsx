@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { KonvaEventObject } from 'konva/lib/Node';
 import React, { useEffect, useRef, useState } from 'react';
 import { Arrow, Circle, Ellipse, Layer, Line, Rect, RegularPolygon, Stage, Star, Text, Transformer } from 'react-konva';
@@ -63,6 +62,13 @@ const Canvas: React.FC = () => {
     const handleSelectShape = (e: KonvaEventObject<MouseEvent>, id: string) => {
         if (tool === 'select') {
             setSelectedShapeId(id);
+        }
+    };
+
+    const handleStageMouseDown = (e: KonvaEventObject<MouseEvent>) => {
+        const clickedOnEmpty = e.target === e.target.getStage();
+        if (clickedOnEmpty) {
+            setSelectedShapeId(null);
         }
     };
 
@@ -152,6 +158,15 @@ const Canvas: React.FC = () => {
         setBackgroundPattern(pattern);
     };
 
+    const handleDeleteShape = () => {
+        if (selectedShapeId) {
+            const newShapes = shapes.filter(shape => shape.id !== selectedShapeId);
+            setShapes(newShapes);
+            setSelectedShapeId(null);
+            updateHistory(newShapes);
+        }
+    };
+
     return (
         <div className="canvas-container" style={{ backgroundImage: `url(src/assets/images/${backgroundPattern})` }}>
             <Toolbar
@@ -163,20 +178,18 @@ const Canvas: React.FC = () => {
                 selectedShapeType={selectedShapeType}
                 onShapeTypeChange={setSelectedShapeType}
                 onPatternChange={handlePatternChange}
+                onDeleteShape={handleDeleteShape}
             />
-
             <div className="ruler-horizontal">
                 {Array.from({ length: Math.ceil(window.innerWidth / 50) }, (_, i) => (
                     <span key={i}>{i * 50}</span>
                 ))}
             </div>
-
             <div className="ruler-vertical">
                 {Array.from({ length: Math.ceil(window.innerHeight / 50) }, (_, i) => (
                     <span key={i}>{i * 50}</span>
                 ))}
             </div>
-
             <Stage
                 width={window.innerWidth}
                 height={window.innerHeight}
@@ -184,6 +197,7 @@ const Canvas: React.FC = () => {
                 onWheel={handleWheel}
                 ref={stageRef}
                 className="stage"
+                onMouseDown={handleStageMouseDown}
             >
                 <Layer>
                     {shapes

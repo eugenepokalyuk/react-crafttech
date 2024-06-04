@@ -10,6 +10,7 @@ interface ToolbarProps {
     selectedShapeType: string;
     onShapeTypeChange: (type: string) => void;
     onPatternChange: (pattern: string) => void;
+    onDeleteShape: () => void;
 }
 
 const patterns = [
@@ -31,6 +32,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
     selectedShapeType,
     onShapeTypeChange,
     onPatternChange,
+    onDeleteShape,
 }) => {
     const [dragging, setDragging] = useState<boolean>(false);
     const toolbarRef = useRef<HTMLDivElement>(null);
@@ -116,10 +118,13 @@ const Toolbar: React.FC<ToolbarProps> = ({
                         key={index}
                         className="pattern-circle"
                         onClick={() => onPatternChange(pattern)}
-                        style={{ backgroundImage: `url(src/assets/images/${pattern})` }}
+                        style={{ backgroundImage: `url(/src/assets/images/${pattern})` }}
                     ></div>
                 ))}
             </div>
+            <button onClick={onDeleteShape}>
+                <img src="src/assets/icons/delete.svg" alt="Delete" /> Delete Shape
+            </button>
         </div>
     );
 };
