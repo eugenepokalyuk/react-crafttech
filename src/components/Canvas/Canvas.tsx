@@ -23,7 +23,7 @@ const Canvas: React.FC = () => {
     const [selectedShapeType, setSelectedShapeType] = useState<string>('');
     const [history, setHistory] = useState<any[][]>([]);
     const [historyIndex, setHistoryIndex] = useState<number>(-1);
-    const [backgroundPattern, setBackgroundPattern] = useState<string>('pattern1.png');
+    const [backgroundPattern, setBackgroundPattern] = useState<string>('pattern1.jpg');
     const stageRef = useRef<any>(null);
     const transformerRef = useRef<any>(null);
 
