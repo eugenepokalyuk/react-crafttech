@@ -1,6 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './Toolbar.scss';
 
+import IconAdd from '../../assets/icons/add.svg';
+import IconDelete from '../../assets/icons/delete.svg';
+import IconRedo from '../../assets/icons/redo.svg';
+import IconSelect from '../../assets/icons/select.svg';
+import IconUndo from '../../assets/icons/undo.svg';
+
+import PatternOne from '../../assets/images/pattern1.jpg';
+import PatternTwo from '../../assets/images/pattern2.jpg';
+import PatternThree from '../../assets/images/pattern3.jpg';
+import PatternFour from '../../assets/images/pattern4.jpg';
+import PatternFive from '../../assets/images/pattern5.jpg';
+import PatternSix from '../../assets/images/pattern6.jpg';
+import PatternSeven from '../../assets/images/pattern7.jpg';
+
 interface ToolbarProps {
     onAddShape: () => void;
     onSelectTool: (tool: string) => void;
@@ -14,13 +28,13 @@ interface ToolbarProps {
 }
 
 const patterns = [
-    'pattern1.jpg',
-    'pattern2.jpg',
-    'pattern3.jpg',
-    'pattern4.jpg',
-    'pattern5.jpg',
-    'pattern6.jpg',
-    'pattern7.jpg',
+    PatternOne,
+    PatternTwo,
+    PatternThree,
+    PatternFour,
+    PatternFive,
+    PatternSix,
+    PatternSeven
 ];
 
 const Toolbar: React.FC<ToolbarProps> = ({
@@ -96,17 +110,17 @@ const Toolbar: React.FC<ToolbarProps> = ({
                 </select>
             </div>
             <button onClick={onAddShape}>
-                <img src="src/assets/icons/add.svg" alt="Add" /> Add Shape
+                <img src={IconAdd} alt="Add" /> Add Shape
             </button>
             <button onClick={() => onSelectTool('select')}>
-                <img src="src/assets/icons/select.svg" alt="Select" /> Select
+                <img src={IconSelect} alt="Select" /> Select
             </button>
             <div className="undo-redo">
                 <button onClick={onUndo}>
-                    <img src="src/assets/icons/undo.svg" alt="Undo" /> Undo
+                    <img src={IconUndo} alt="Undo" /> Undo
                 </button>
                 <button onClick={onRedo}>
-                    <img src="src/assets/icons/redo.svg" alt="Redo" /> Redo
+                    <img src={IconRedo} alt="Redo" /> Redo
                 </button>
             </div>
             <div className="toolbar-header">
@@ -118,12 +132,12 @@ const Toolbar: React.FC<ToolbarProps> = ({
                         key={index}
                         className="pattern-circle"
                         onClick={() => onPatternChange(pattern)}
-                        style={{ backgroundImage: `url(/src/assets/images/${pattern})` }}
+                        style={{ backgroundImage: `url(${pattern})` }}
                     ></div>
                 ))}
             </div>
             <button onClick={onDeleteShape}>
-                <img src="src/assets/icons/delete.svg" alt="Delete" /> Delete Shape
+                <img src={IconDelete} alt="Delete" /> Delete Shape
             </button>
         </div>
     );
