@@ -59,7 +59,7 @@ const Canvas: React.FC = () => {
         updateHistory(newShapes);
     };
 
-    const handleSelectShape = (e: KonvaEventObject<MouseEvent>, id: string) => {
+    const handleSelectShape = (_e: KonvaEventObject<MouseEvent>, id: string) => {
         if (tool === 'select') {
             setSelectedShapeId(id);
         }
