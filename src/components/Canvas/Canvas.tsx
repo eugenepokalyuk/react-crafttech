@@ -2,6 +2,7 @@
 import { KonvaEventObject } from 'konva/lib/Node';
 import React, { useEffect, useRef, useState } from 'react';
 import { Arrow, Circle, Ellipse, Layer, Line, Rect, RegularPolygon, Stage, Star, Text, Transformer } from 'react-konva';
+import PatternOne from '../../assets/images/pattern1.jpg';
 import Toolbar from '../Toolbar/Toolbar';
 import './Canvas.scss';
 
@@ -23,7 +24,7 @@ const Canvas: React.FC = () => {
     const [selectedShapeType, setSelectedShapeType] = useState<string>('');
     const [history, setHistory] = useState<any[][]>([]);
     const [historyIndex, setHistoryIndex] = useState<number>(-1);
-    const [backgroundPattern, setBackgroundPattern] = useState<string>('pattern1.jpg');
+    const [backgroundPattern, setBackgroundPattern] = useState<string>(PatternOne);
     const stageRef = useRef<any>(null);
     const transformerRef = useRef<any>(null);
 
@@ -168,7 +169,7 @@ const Canvas: React.FC = () => {
     };
 
     return (
-        <div className="canvas-container" style={{ backgroundImage: `url(src/assets/images/${backgroundPattern})` }}>
+        <div className="canvas-container" style={{ backgroundImage: `url(${backgroundPattern})` }}>
             <Toolbar
                 onAddShape={handleAddShape}
                 onSelectTool={setTool}
